@@ -16,12 +16,20 @@ with open("task9.csv", "r") as file:
   for i, stock in enumerate(prices.keys(), start=1):
    prices[stock].append(float(row[i]))
 
-for stock, stock_prices in prices.items():
- plt.plot(dates, stock_prices, label=stock)
+for stock in prices:
+ initial_price = prices[stock][0]
+ final_price = prices[stock][-1]
+ prices[stock] = [(price / initial_price - 1) * 100 for price in prices[stock]]
 
-plt.title("Stock Prices Over Time")
+ percentage_changes[stock] = (final_price / initial_price - 1) * 100
+
+for stock, stock_prices in prices.items():
+ label_with_percentage = f"{stock}: {percentage_changes[stock]:.2f}%"
+ plt.plot(dates, stock_prices, label=label_with_percentage, color=colors[stock])
+
+plt.title("Stock Prices Over Time (percentage change)")
 plt.xlabel("Date")
-plt.ylabel("Price (USD)")
+plt.ylabel("Percentage Change (%)")
 plt.legend()
 plt.grid(True)
 plt.gcf().autofmt_xdate()
