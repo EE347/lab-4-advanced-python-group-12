@@ -4,6 +4,8 @@ from datetime import datetime
 
 dates = []
 prices = {'META': [], 'AAPL': [], 'AMZN': [], 'NFLX': [], 'NVDA': [], 'GOOGL': []}
+colors = {'META': 'blue', 'AAPL': 'gray', 'AMZN': 'black', 'NFLX': 'red', 'NVDA': 'green', 'GOOGL': 'orange'}
+percentage_changes = {}
 
 with open("task9.csv", "r") as file:
  reader = csv.reader(file)
